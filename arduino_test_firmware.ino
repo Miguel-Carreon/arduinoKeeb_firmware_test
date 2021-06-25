@@ -12,8 +12,8 @@ char matrixKeeb[ROWS][COLS] = {
   {'*','0','#','D'}
 };
 
-byte rowPins[ROWS] = {5, 4, 3, 2}; //Respective pinout for the rows
-byte colPins[COLS] = {9, 8, 7, 6}; //Respective pinout for the columns
+byte rowPins[ROWS] = {9, 8, 7, 6}; //Respective pinout for the rows
+byte colPins[COLS] = {5, 4, 3, 2}; //Respective pinout for the columns
 
 //Initializa a new Keypad class
 Keypad keypad = Keypad(makeKeymap(matrixKeeb), rowPins, colPins, ROWS, COLS);
