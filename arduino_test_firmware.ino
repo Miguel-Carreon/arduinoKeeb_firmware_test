@@ -1,6 +1,7 @@
-//Test 2
 #include <Keypad.h>
 #include <Keyboard.h>
+
+int level = 0;
 
 const byte ROWS = 4; //The keeboard has four rows
 const byte COLS = 4; //The keeboard has four columns
@@ -26,6 +27,13 @@ void setup() {
 
 }
 
+void debounce(int d){
+      
+  delay(d);
+  Keyboard.releaseAll(); //Releases keys
+    
+}
+
 void csMacro(uint8_t key){
   
   Keyboard.press(KEY_LEFT_CTRL);
@@ -41,67 +49,99 @@ void cMacro(uint8_t key){
   
 }
 
+void sKey(uint8_t key){
+  Keyboard.press(KEY_LEFT_SHIFT);
+  Keyboard.press(key);
+}
+
+void keyPush(uint8_t key){
+
+  Keyboard.press(key);
+  Keyboard.release(key);
+  
+}
+
 void loop() {
 
   char key = keypad.getKey();
 
   if (key){
     Serial.println(key);
-    switch(key){
-      //CTRL+SHIFT+KEY
-      case '1':
-        csMacro(KEY_F2);
-        break;
-      case '2':
-        csMacro('d');
-        break;
-      case '3':
-        csMacro(KEY_F1);
-        break;
-      case 'A':
-        csMacro('g');
-        break;
-      case '4':
-        csMacro('t');
-        break;
-      case '5':
-        csMacro('p');
-        break;
-    //CTRL+KEY
-      case '6':
-        cMacro(KEY_TAB);
-        break;
-      case 'B':
-        cMacro('s');
-        break;
-      case '7':
-        cMacro('x');
-        break;
-      case '8':
-        cMacro('c');
-        break;
-      case '9':
-        cMacro('v');
-        break;
-      case 'C':
-        cMacro('y');
-        break;
-      case '*':
-        cMacro('z');
-        break;
-      case '0':
-        cMacro('1');
-        break;
-      case '#':
-        cMacro('7');
-        break;
-      case 'D':
-        cMacro('8');
-        break;
+    Keyboard.releaseAll();
+    if (key == '*'){
+      level++;
+      if (level > 3){
+        level = 3;
+      }
     }
 
-    delay(100);
-    Keyboard.releaseAll(); //Releases keys
-  }
+    else if (key == '#'){
+      level--;
+      if (level < 0){
+        level = 0;
+      }
+    } 
 
+    if (level == 0){
+      switch(key){
+        case '1':
+          csMacro(KEY_F2);
+          debounce(100);
+          break;
+        case '2':
+          csMacro('d');
+          debounce(100);
+          break;
+      }
+    }
+
+    else if (level == 1){
+      switch(key){
+        case '1':
+          csMacro(KEY_F1);
+          debounce(100);
+          break;
+        case '2':
+          csMacro('g');
+          debounce(100);
+          break;
+      }
+    }
+    else if (level == 2){
+      switch(key){
+        case '1':
+          csMacro('t');
+          debounce(100);
+          break;
+        case '2':
+          cMacro('t');
+          debounce(100);
+          break;
+        case '3':
+          csMacro('p');
+          debounce(100);
+          break;
+      }
+    }
+    else if (level == 3){
+      switch(key){
+        case '1':
+          Keyboard.write('>');
+          Keyboard.print("ddpVirolo");
+          Keyboard.write('>');
+          
+          debounce(100);
+          break;
+        case '2':
+          Keyboard.write('>');
+          Keyboard.print("ddpSexy");
+          Keyboard.write('>');
+          debounce(100);
+          break;
+      }
+
+    
+    
+    }
+  }
 }
