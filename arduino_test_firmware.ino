@@ -55,19 +55,14 @@ void sKey(uint8_t key){
   Keyboard.press(key);
 }
 
-void keyPush(uint8_t key){
 
-  Keyboard.press(key);
-  Keyboard.release(key);
-  
-}
-
-void windowsRun(char command){
+void windowsRun(String command){
 
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('r');
   Keyboard.release(KEY_LEFT_GUI);
   Keyboard.release('r');
+  delay(15);
   Keyboard.print(command);
   Keyboard.releaseAll();
   delay(10);
@@ -108,29 +103,14 @@ void loop() {
           debounce(100);
           break;
         case '0':
-          Keyboard.press(KEY_LEFT_GUI);
-          Keyboard.press('r');
-          Keyboard.release(KEY_LEFT_GUI);
-          Keyboard.release('r');
-          delay(15);
-          Keyboard.print("cmd");
-          Keyboard.releaseAll();
-          delay(10);
-          Keyboard.press(KEY_RETURN);
-          debounce(100);
+          windowsRun("cmd");
           break;
         case 'D':
-          //windowsRun("%temp%");
-          Keyboard.press(KEY_LEFT_GUI);
-          Keyboard.press('r');
-          Keyboard.release(KEY_LEFT_GUI);
-          Keyboard.release('r');
-          delay(15);
-          Keyboard.print("%temp%");
-          Keyboard.releaseAll();
-          delay(10);
-          Keyboard.press(KEY_RETURN);
+          windowsRun("%temp%");
           debounce(100);
+          break;
+         case 'A':
+          windowsRun("cmd");
           break;
         }
     }
