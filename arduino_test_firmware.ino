@@ -56,13 +56,13 @@ void sKey(uint8_t key){
 }
 
 
-void windowsRun(String command){
+void windowsRun(int d, String command){
 
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('r');
   Keyboard.release(KEY_LEFT_GUI);
   Keyboard.release('r');
-  delay(15);
+  delay(d);
   Keyboard.print(command);
   Keyboard.releaseAll();
   delay(10);
@@ -103,14 +103,14 @@ void loop() {
           debounce(100);
           break;
         case '0':
-          windowsRun("cmd");
+          windowsRun(20, "cmd");
           break;
         case 'D':
-          windowsRun("%temp%");
+          windowsRun(20, "%temp%");
           debounce(100);
           break;
          case 'A':
-          windowsRun("cmd");
+          windowsRun(40,"https>&&u.gg&");
           break;
         }
     }
@@ -149,19 +149,15 @@ void loop() {
           Keyboard.write('>');
           Keyboard.print("ddpVirolo");
           Keyboard.write('>');
-          
           debounce(100);
           break;
         case '2':
           Keyboard.write('>');
           Keyboard.print("ddpSexy");
           Keyboard.write('>');
-          debounce(100);
+          debounce(100);cmd
           break;
       }
-
-    
-    
     }
   }
 }
