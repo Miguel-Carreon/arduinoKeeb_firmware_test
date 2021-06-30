@@ -155,7 +155,7 @@ void loop() {
           Keyboard.write('>');
           Keyboard.print("ddpSexy");
           Keyboard.write('>');
-          debounce(100);cmd
+          debounce(100);
           break;
       }
     }
