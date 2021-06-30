@@ -62,6 +62,20 @@ void keyPush(uint8_t key){
   
 }
 
+void windowsRun(char command){
+
+  Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.press('r');
+  Keyboard.release(KEY_LEFT_GUI);
+  Keyboard.release('r');
+  Keyboard.print(command);
+  Keyboard.releaseAll();
+  delay(10);
+  Keyboard.press(KEY_RETURN);
+  debounce(100);
+  
+}
+
 void loop() {
 
   char key = keypad.getKey();
@@ -93,7 +107,32 @@ void loop() {
           csMacro('d');
           debounce(100);
           break;
-      }
+        case '0':
+          Keyboard.press(KEY_LEFT_GUI);
+          Keyboard.press('r');
+          Keyboard.release(KEY_LEFT_GUI);
+          Keyboard.release('r');
+          delay(15);
+          Keyboard.print("cmd");
+          Keyboard.releaseAll();
+          delay(10);
+          Keyboard.press(KEY_RETURN);
+          debounce(100);
+          break;
+        case 'D':
+          //windowsRun("%temp%");
+          Keyboard.press(KEY_LEFT_GUI);
+          Keyboard.press('r');
+          Keyboard.release(KEY_LEFT_GUI);
+          Keyboard.release('r');
+          delay(15);
+          Keyboard.print("%temp%");
+          Keyboard.releaseAll();
+          delay(10);
+          Keyboard.press(KEY_RETURN);
+          debounce(100);
+          break;
+        }
     }
 
     else if (level == 1){
