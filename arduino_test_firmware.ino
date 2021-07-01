@@ -1,7 +1,8 @@
-//Working test
 #include <Keypad.h>
 #include <Keyboard.h>
 
+char holdKey;
+unsigned long holdTime;
 int level = 0;
 
 const byte ROWS = 4; //The keeboard has four rows
@@ -71,23 +72,24 @@ void windowsRun(int d, String command){
   
 }
 
+void discordEmoji(String Emoji){
+  Keyboard.print('>');
+  Keyboard.print(Emoji);
+  Keyboard.print('>');
+  debounce(100);
+}
+
 void loop() {
 
   char key = keypad.getKey();
 
   if (key){
+    holdKey = key;
     Serial.println(key);
     Keyboard.releaseAll();
     if (key == '*'){
       level++;
-      if (level > 3){
-        level = 3;
-      }
-    }
-
-    else if (key == '#'){
-      level--;
-      if (level < 0){
+      if (level > 2){
         level = 0;
       }
     } 
@@ -103,10 +105,14 @@ void loop() {
           debounce(100);
           break;
         case '0':
-          windowsRun(20, "cmd");
+          windowsRun(40, "cmd");
           break;
         case 'D':
-          windowsRun(20, "%temp%");
+          windowsRun(40, "%temp%");
+          debounce(100);
+          break;
+        case 'C':
+          cMacro('a');
           debounce(100);
           break;
          case 'A':
@@ -125,39 +131,79 @@ void loop() {
           csMacro('g');
           debounce(100);
           break;
-      }
-    }
-    else if (level == 2){
-      switch(key){
-        case '1':
+        case '3':
           csMacro('t');
           debounce(100);
           break;
-        case '2':
+        case 'A':
           cMacro('t');
           debounce(100);
           break;
-        case '3':
+        case '4':
           csMacro('p');
           debounce(100);
           break;
       }
     }
-    else if (level == 3){
+    else if (level == 2){
       switch(key){
         case '1':
-          Keyboard.write('>');
-          Keyboard.print("ddpVirolo");
-          Keyboard.write('>');
-          debounce(100);
+          discordEmoji("ddpVirolo");
           break;
         case '2':
-          Keyboard.write('>');
-          Keyboard.print("ddpSexy");
-          Keyboard.write('>');
-          debounce(100);
+          discordEmoji("ddpSexy");
+          break;
+        case '3':
+          discordEmoji("ddpVirus");
+          break;
+        case 'A':
+          discordEmoji("ddpdios");
+          break;
+        case '4':
+          discordEmoji("ddpAlien");
+          break;
+        case '5':
+          discordEmoji("ddpPelon");
+          break;
+        case '6':
+          discordEmoji("papaBless");
+          break;
+        case 'B':
+          discordEmoji("ddpDozal");
+          break;
+        case '7':
+          discordEmoji("ddpFeto");
+          break;
+        case '8':
+          discordEmoji("ddpFeto2");
+          break;
+        case '9':
+          discordEmoji("ddpSemamaron");
+          break;
+        case 'C':
+          discordEmoji("ddpBlanco3");
+          break;
+        case '0':
+          discordEmoji("ddpBlanco2");
+          break;
+        case 'D':
+          discordEmoji("ddpMex");
           break;
       }
+    }
+  }
+
+  if (keypad.getState() == HOLD){
+    if ((millis() - holdTime) > 100){
+      //Available space for key commands
+      if (level == 2){
+        switch (holdKey){
+          case '1':
+            discordEmoji("ddpVirolo");
+            break;
+        }
+      }
+      holdTime = millis();
     }
   }
 }
