@@ -24,7 +24,7 @@
 
       Created 28 Jun 2021
       By: Miguel Carreón
-      Modified 1 Jul 2021
+      Modified 2 Jul 2021
       By:  Miguel Carreón
 
       https://github.com/Miguel-Carreon/arduinoKeeb_firmware_test
@@ -149,19 +149,46 @@ void loop() {
           csMacro('d');
           debounce(100);
           break;
-        case '0':
-          windowsRun(40, "cmd");
+        case '3':
+
           break;
-        case 'D':
-          windowsRun(40, "%temp%");
-          debounce(100);
+        case 'A':
+          windowsRun(40,"https>&&u.gg&");
           break;
+        case '4':
+
+           break;
+        case '5':
+
+           break;
+        case '6':
+
+           break;
+        case 'B':
+
+           break;
+        case '7':
+
+           break;
+        case '8':
+
+           break;
+        case '9':
+
+           break;
         case 'C':
           cMacro('a');
           debounce(100);
           break;
-         case 'A':
-          windowsRun(40,"https>&&u.gg&");
+        case '0':
+          windowsRun(40, "cmd");
+          break;
+        case '#':
+
+           break;
+        case 'D':
+          windowsRun(40, "%temp%");
+          debounce(100);
           break;
         }
     }
@@ -188,6 +215,36 @@ void loop() {
         case '4':
           csMacro('p');
           debounce(100);
+          break;
+        case '5':
+
+          break;
+        case '6':
+
+          break;
+        case 'B':
+
+          break;
+        case '7':
+
+          break;
+        case '8':
+
+          break;
+        case '9':
+
+          break;
+        case 'C':
+
+          break;
+        case '0':
+
+          break;
+        case '#':
+
+          break;
+        case 'D':
+
           break;
       }
     }
@@ -234,6 +291,9 @@ void loop() {
         case '0':
           discordEmoji("ddpBlanco2");
           break;
+        case '#':
+          discordEmoji("ddpDanito");
+          break;
         case 'D':
           discordEmoji("ddpMex");
           break;
@@ -245,9 +305,23 @@ void loop() {
   if (keypad.getState() == HOLD){
     if ((millis() - holdTime) > 100){
       //Available space for key commands
-
+      
+      //Level zero
+      if (level == 0){
+        switch (holdKey){
+          //Commands for level zero while holding
+        }
+      }
+      
+      //Level one
+      else if (level == 1){
+        switch (holdKey){
+          //Commands for level one while holding
+        }
+      }
+      
       //Level two
-      if (level == 2){
+      else if (level == 2){
         switch (holdKey){
           case '1':
             discordEmoji("ddpVirolo");
@@ -260,4 +334,4 @@ void loop() {
 }
 
 /* Levels for the sigle key press and key hold are the same, just put the command in the corresponding
- *  desired function*/
+   desired function*/
