@@ -24,7 +24,7 @@
 
       Created 28 Jun 2021
       By; Miguel Carreón
-      Modiffied 1 Jul 2021
+      Modified 1 Jul 2021
       By;  Miguel Carreón
 
       https://github.com/Miguel-Carreon/arduinoKeeb_firmware_test
