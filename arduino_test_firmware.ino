@@ -30,7 +30,7 @@
       https://github.com/Miguel-Carreon/arduinoKeeb_firmware_test
 ===========================================================================================================*/
 #include <Keypad.h>
-#include <Keyboard.h>
+#include "HID-Project.h"
 
 //  Global variables declaration  //
 char holdKey; //Sores a key that is being holded
@@ -58,7 +58,8 @@ void setup() {
   
   Serial.begin(9600); //Baud rate to 9600
   Keyboard.begin(); //Starts keyboard HID device
-
+  Consumer.begin(); //Starts consumer function from the HID-Project library
+  
 }
 
 // Funtion to ignore mechanical bouncing  //
@@ -78,6 +79,14 @@ void csMacro(uint8_t key){
   
 }
 
+//Presses CTRL + SHIFT
+void csPress(){
+  
+  Keyboard.press(KEY_LEFT_CTRL);
+  Keyboard.press(KEY_LEFT_SHIFT);
+  
+}
+
 // Funtion to press CTRL + ANYKEY //
 void cMacro(uint8_t key){
   
@@ -86,7 +95,7 @@ void cMacro(uint8_t key){
   
 }
 
-// Funtion to press CTRL + ANYKEY //
+// Funtion to press SHIFT + ANYKEY //
 void sKey(uint8_t key){
   Keyboard.press(KEY_LEFT_SHIFT);
   Keyboard.press(key);
@@ -142,7 +151,8 @@ void loop() {
     if (level == 0){
       switch(key){
         case '1':
-          csMacro(KEY_F2);
+          csPress();
+          Keyboard.press(KEY_F2);
           debounce(100);
           break;
         case '2':
@@ -150,7 +160,7 @@ void loop() {
           debounce(100);
           break;
         case '3':
-
+          windowsRun(40,"spotify");
           break;
         case 'A':
           windowsRun(40,"https>&&u.gg&");
@@ -197,7 +207,8 @@ void loop() {
     else if (level == 1){
       switch(key){
         case '1':
-          csMacro(KEY_F1);
+          csPress();
+          Keyboard.press(KEY_F1);
           debounce(100);
           break;
         case '2':
@@ -310,6 +321,14 @@ void loop() {
       if (level == 0){
         switch (holdKey){
           //Commands for level zero while holding
+          case '7':
+            Consumer.write(MEDIA_REWIND);
+            Keyboard.releaseAll();
+            break;
+          case '8':
+            Consumer.write(MEDIA_FAST_FORWARD);
+            Keyboard.releaseAll();
+            break;
         }
       }
       
